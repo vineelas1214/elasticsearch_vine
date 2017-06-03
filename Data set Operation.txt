@@ -1,0 +1,32 @@
+GET /
+
+POST /my-index/my-type/1
+{
+  "body":"foo"
+}
+
+PUT /index/type/object_id'{ <document data> }'
+PUT "http://localhost:9200" {  }
+
+PUT /playground/equipment/1/_create
+{ "type": "slide", "quantity": 2 }
+PUT /playground/equipment/1
+ { "type": "slide", "quantity": 2 }
+ PUT /playground/equipment/1/_create
+{ "type": "slide", "quantity": 2 }
+GET /playground/equipment/1
+{"_index":"playground","_type":"equipment","_id":"1","_version":2,"exists":true, "_source" :  { "type": "slide", "quantity": 1 }}
+GET /playground/equipment/1?pretty
+POST /playground/equipment/1/_update
+{ "script": "ctx._source.quantity += step", "params": { "step": 1 } }
+GET /playground/equipment/1/_source
+POST /playground/equipment/1/_update
+{ "script": "ctx._source.remove(\"name_of_new_key\")" }
+DELETE /playground/equipment/36
+
+GET /_search?q=quantity:4
+GET /_search?q=quantity:4&pretty
+GET /playground/equipment/_search?q=quantity:4&pretty
+GET /_all/equipment/_search?q=quantity:4&pretty
+GET /playground/equipment/_search
+{ "query": { "term": { "type": "slide" } } }
